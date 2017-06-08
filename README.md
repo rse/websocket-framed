@@ -18,6 +18,8 @@ to encode/decode WebSocket messages to/from frames, based on the object serializ
 Object Notation (JSON, [RFC4627](https://tools.ietf.org/html/rfc4627)),
 Concise Binary Object Representation (CBOR, [RFC7049](https://tools.ietf.org/html/rfc7049))
 or [MsgPack](https://github.com/msgpack/msgpack/blob/master/spec.md).
+It solves three particular problems: the serialization of the data,
+the type annotation of data and the request/response correlation.
 
 Installation
 ------------
@@ -41,7 +43,7 @@ wsf.on("message", (request) => {
     wsf.send(response, request)
 })
 
-let request = { type: "REQUEST", data: ... }
+let request = { type: ..., data: ... }
 wsf.send(request)
 ```
 
@@ -52,10 +54,10 @@ Application Programming Interface
   Create a new WebSocket-Framed instance for a particular communication
   with the help of the frame serialization cocdec. The supported codecs are `json`, `cbor` and `msgpack`.
 
-- `API::on(name: string, callback: (frame: { fid, rid, type, data }) => Void): Void`
+- `API::on(name: string, callback: (frame: { fid: number, rid: number, type: string, data: string }) => Void): Void`
   Receive a message in case `name` is `message` in the form of a decoded frame.
 
-- `API::send(frame: { type, data }, replyTo?: frame): Void`
+- `API::send(frame: { type: string, data: string }, replyTo?: frame): Void`
   Send a message in the form of a encoded frame.
   Optionally set the `rid` of the message to the `fid` of the frame you want to replyt to.
 

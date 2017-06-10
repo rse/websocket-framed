@@ -49,7 +49,7 @@ class Frame {
         this.data = null
     }
     set (frame, replyTo = undefined) {
-        this.fid  = this.channel._fid()
+        this.fid  = this.channel.fid()
         this.rid  = replyTo ? replyTo.fid : 0
         this.type = frame.type ? frame.type : "MESSAGE"
         this.data = frame.data ? frame.data : null

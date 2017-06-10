@@ -38,7 +38,7 @@ let ws  = new WebSocket(...)
 let wsf = new WebSocketFramed(ws, "cbor")
 
 wsf.on("message", (event) => {
-    let request = event.data
+    let request = event.frame
     let { fid, rid, type, message }) = request
     let response = { type: ..., message: ... }
     wsf.send(response, request)
@@ -55,12 +55,12 @@ Application Programming Interface
   Create a new WebSocket-Framed instance for a particular communication
   with the help of the frame serialization cocdec. The supported codecs are `json`, `cbor` and `msgpack`.
 
-- `API::on(name: string, callback: (event: { data: { fid: number, rid: number, type: string, data: string } }) => Void): Void`
-  Receive a message in case `name` is `message` in the form of a decoded frame attached to `event.data`.
+- `API::on(name: string, callback: (event: { frame: { fid: number, rid: number, type: string, data: string }, data: any }) => Void): Void`
+  Receive a message in case `name` is `message` in the form of a decoded frame attached to `event.frame`.
 
-- `API::send(frame: { type: string, data: string }, replyTo?: frame): Void`
+- `API::send(frame: { type: string, data: string }, replyTo?: frame): { frame: { fid: number, rid: number, type: string, data: string }, data: any }`
   Send a message in the form of a encoded frame.
-  Optionally set the `rid` of the message to the `fid` of the frame you want to replyt to.
+  Optionally set the `rid` of the message to the `fid` of the frame you want to reply to.
 
 License
 -------

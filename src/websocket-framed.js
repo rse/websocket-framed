@@ -88,7 +88,7 @@ class WebSocketFramed extends EventEmitter {
         this.ws.addEventListener("message", (ev) => {
             let frame = new Frame(this)
             frame.import(ev.data)
-            ev.data = frame
+            ev.frame = frame
             this.emit("message", event)
         })
     }
@@ -97,6 +97,7 @@ class WebSocketFramed extends EventEmitter {
         frame.set(frameData, replyTo)
         let data = frame.export()
         this.ws.send(data)
+        return { frame, data }
     }
 }
 

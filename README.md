@@ -40,7 +40,7 @@ let wsf = new WebSocketFramed(ws, "cbor")
 
 wsf.on("message", (event) => {
     let request = event.frame
-    let { fid, rid, type, message }) = request
+    let { type, message }) = request
     let response = { type: ..., message: ... }
     wsf.send(response, request)
 })
@@ -54,9 +54,7 @@ Frame Format
 
 ```
 Frame: [ fid: number, rid: number, type: string, data: any ]
-```
 
-```
 +--------+--------+--------+--------+
 |  fid   |  rid   |  type  |  data  |
 +--------+--------+--------+--------+

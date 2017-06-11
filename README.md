@@ -78,13 +78,16 @@ Application Programming Interface
 
 - `API::on(name: String, callback: (event: { frame: Frame, data: any }) => Void): Void`:<br/>
   Receive a message in case `name` is `message`.
-  The decoded frame is attached to the event under `event.frame`.
-  The encoded raw data is is attached to the event under `event.data`.
+  The (decoded) frame is attached to the event under `event.frame`.
+  The (encoded) raw data is is attached to the event under `event.data`.
 
 - `API::send(frame: Frame, replyTo?: Frame): { frame: Frame, data: any }`:<br/>
   Send a message in the form of an encoded frame.
-  Optionally set the `rid` of the message to the `fid` of the frame you want to reply to
-  a particular frame. Returns the actually sent decoded frame and its encoded raw data.
+  The frame fields `type` and `data` are mandatory.
+  The frame field `fid` can be set manually or is auto-generated.
+  The frame field `rid` can be set manually or is set to `0`
+  or is set to the `fid` field of the frame `replyTo` you want to reply to.
+  Returns the actually sent (decoded) frame and its (encoded) raw data.
 
 License
 -------

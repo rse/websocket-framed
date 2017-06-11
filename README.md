@@ -14,13 +14,13 @@ About
 -----
 
 This is a small JavaScript library for Node.js and the Browser
-to encode/decode WebSocket messages to/from frames, based on the object serialization formats JavaScript
+to encode/decode WebSocket messages to/from a wrapping "frame" data structure.
+The frame itself can be encoded based on the object serialization formats JavaScript
 Object Notation (JSON, [RFC4627](https://tools.ietf.org/html/rfc4627)),
 Concise Binary Object Representation (CBOR, [RFC7049](https://tools.ietf.org/html/rfc7049))
 or [MsgPack](https://github.com/msgpack/msgpack/blob/master/spec.md).
-It solves three particular problems: the serialization of complex data structures,
-the type annotation of data and the request/response correlation through
-frame and reply identifiers.
+This library solves three particular problems in practice: the serialization of complex data structures,
+the type annotation and the request/response correlation.
 
 Installation
 ------------

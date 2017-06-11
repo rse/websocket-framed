@@ -88,7 +88,10 @@ class WebSocketFramed extends EventEmitter {
         this.ws.addEventListener("message", (ev) => {
             let frame = new Frame(this)
             try {
-                frame.import(ev.data)
+                let data = ev.data
+                if (typeof data !== "string" && !ArrayBuffer.isView(data) && process.browser)
+                    data = new Uint8Array(data)
+                frame.import(data)
             }
             catch (ex) {
                 this.emit("error", ex)
@@ -102,6 +105,8 @@ class WebSocketFramed extends EventEmitter {
         let frame = new Frame(this)
         frame.set(frameData, replyTo)
         let data = frame.export()
+        if (typeof data !== "string" && ArrayBuffer.isView(data) && process.browser)
+            data = data.buffer
         this.ws.send(data)
         return { frame, data }
     }

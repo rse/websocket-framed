@@ -100,16 +100,9 @@ class WebSocketFramed extends EventEmitter {
     }
     send (frameData, replyTo) {
         let frame = new Frame(this)
-        let data
-        try {
-            frame.set(frameData, replyTo)
-            data = frame.export()
-            this.ws.send(data)
-        }
-        catch (ex) {
-            this.emit("error", ex)
-            return
-        }
+        frame.set(frameData, replyTo)
+        let data = frame.export()
+        this.ws.send(data)
         return { frame, data }
     }
 }

@@ -53,7 +53,7 @@ Frame Format
 ------------
 
 ```
-[ fid: number, rid: number, type: string, data: any ]
+Frame: [ fid: number, rid: number, type: string, data: any ]
 ```
 
 ```
@@ -62,24 +62,31 @@ Frame Format
 +--------+--------+--------+--------+
 ```
 
-The `fid` is the frame id, a numeric unique id between 0 and 2^32 the sending side manages per connection.
-The `rid` is the reply id, the frame id of a previously received frame the current sent frame references.
-The `type` is the frame type, a string identifying the type of `data`.
-The `data` is the arbitrary data structure send in the frame. Any JSON is valid here.
+- The `fid` is the frame id, a numeric unique id between 0 and 2^32 the sending side manages per connection.
+
+- The `rid` is the reply id, the frame id of a previously received frame the current sent frame references.
+
+- The `type` is the frame type, a string identifying the type of `data`.
+
+- The `data` is the arbitrary data structure send in the frame. Any JSON is valid here.
 
 Application Programming Interface
 ---------------------------------
 
 - `new WebSocketFramed(ws: WebSocket, codec: string = "json"): API`
   Create a new WebSocket-Framed instance for a particular communication
-  with the help of the frame serialization cocdec. The supported codecs are `json`, `cbor` and `msgpack`.
+  with the help of the frame serialization cocdec. The supported codecs
+  are `json`, `cbor` and `msgpack`.
 
-- `API::on(name: string, callback: (event: { frame: { fid: number, rid: number, type: string, data: string }, data: any }) => Void): Void`
-  Receive a message in case `name` is `message` in the form of a decoded frame attached to `event.frame`.
+- `API::on(name: String, callback: (event: { frame: Frame, data: any }) => Void): Void`
+  Receive a message in case `name` is `message`.
+  The decoded frame is attached to the event under `event.frame`.
+  The encoded raw data is is attached to the event under `event.data`.
 
-- `API::send(frame: { type: string, data: string }, replyTo?: frame): { frame: { fid: number, rid: number, type: string, data: string }, data: any }`
-  Send a message in the form of a encoded frame.
-  Optionally set the `rid` of the message to the `fid` of the frame you want to reply to.
+- `API::send(frame: Frame, replyTo?: Frame): { frame: Frame, data: any }`
+  Send a message in the form of an encoded frame.
+  Optionally set the `rid` of the message to the `fid` of the frame you want to reply to
+  a particular frame. Returns the actually sent decoded frame and its encoded raw data.
 
 License
 -------

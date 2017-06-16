@@ -50,7 +50,7 @@ module.exports = function (grunt) {
                                 "regenerator": false
                             } ] ]
                         } ],
-                        [ "uglifyify", { sourcemap: false, global: true } ]
+                        [ "uglifyify", { sourceMap: false, global: true } ]
                     ],
                     plugin: [
                         [ "browserify-derequire" ],

@@ -21,7 +21,7 @@
     "homepage": "https://github.com/rse/websocket-framed",
     "bugs":     "https://github.com/rse/websocket-framed/issues",
     "dependencies": {
-        "encodr":                            "~0.9.2",
+        "encodr":                            "~0.9.4",
         "eventemitter3":                     "~2.0.3"
     },
     "devDependencies": {
@@ -39,7 +39,7 @@
         "babel-preset-stage-3":              "~6.24.1",
         "babel-preset-stage-2":              "~6.24.1",
         "babel-plugin-transform-runtime":    "~6.23.0",
-        "uglifyify":                         "~4.0.0",
+        "uglifyify":                         "~4.0.1",
         "browserify-header":                 "~0.9.2",
         "browserify-derequire":              "~0.9.4",
         "browserify-shim":                   "~3.8.14",

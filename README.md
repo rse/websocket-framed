@@ -74,7 +74,10 @@ Application Programming Interface
 - `new WebSocketFramed(ws: WebSocket, codec: string = "json"): API`:<br/>
   Create a new WebSocket-Framed instance for a particular communication
   with the help of the frame serialization cocdec. The supported codecs
-  are `json`, `cbor` and `msgpack`.
+  are `json`, `cbor` and `msgpack`. For `json` the resulting WebSocket
+  data frames are (less compact, but human-readable) text frames while
+  for `cbor` and `msgpack` the resulting WebSocket data frames are (very compact,
+  but human-unreadable) binary frames.
 
 - `API::on(name: String, callback: (event: { frame: Frame, data: any }) => Void): Void`:<br/>
   Receive a message in case `name` is `message`.

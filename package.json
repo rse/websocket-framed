@@ -1,6 +1,6 @@
 {
     "name":        "websocket-framed",
-    "version":     "1.0.3",
+    "version":     "1.0.4",
     "description": "Framed WebSocket Communication",
     "keywords":    [ "websocket", "frame", "message" ],
     "browser":     "./lib/websocket-framed.browser.js",

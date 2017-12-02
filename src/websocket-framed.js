@@ -1,5 +1,5 @@
 /*
-**  websocket-frame -- Framed WebSocket Communication
+**  WebSocket-Framed -- Framed WebSocket Communication
 **  Copyright (c) 2017 Ralf S. Engelschall <rse@engelschall.com>
 **
 **  Permission is hereby granted, free of charge, to any person obtaining

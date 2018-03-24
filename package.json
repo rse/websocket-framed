@@ -18,7 +18,7 @@
     "homepage": "https://github.com/rse/websocket-framed",
     "bugs":     "https://github.com/rse/websocket-framed/issues",
     "dependencies": {
-        "encodr":                            "1.0.6",
+        "encodr":                            "1.0.7",
         "eventemitter3":                     "3.0.1"
     },
     "devDependencies": {

@@ -44,9 +44,14 @@ module.exports = function (grunt) {
                 options: {
                     transform: [
                         [ "babelify", {
-                            presets: [ "es2015", "es2016", "es2017", "stage-3", "stage-2" ],
-                            plugins: [ [ "transform-runtime", {
-                                "polyfill":    false,
+                            presets: [
+                                [ "@babel/preset-env", {
+                                    "targets": {
+                                        "browsers": "last 2 versions, not dead"
+                                    }
+                                } ]
+                            ],
+                            plugins: [ [ "@babel/transform-runtime", {
                                 "regenerator": false
                             } ] ]
                         } ],
@@ -71,22 +76,16 @@ module.exports = function (grunt) {
                 options: {
                     sourceMap: false,
                     presets: [
-                        [ "env", {
+                        [ "@babel/preset-env", {
                             "targets": {
-                                "node": 6.0
+                                "node": "6.0"
                             }
-                        } ],
-                        "es2016",
-                        "es2017",
-                        "stage-3",
-                        "stage-2"
+                        } ]
                     ],
                     plugins: [
-                        [ "transform-runtime", {
+                        [ "@babel/transform-runtime", {
                             "helpers":     true,
-                            "polyfill":    true,
-                            "regenerator": false,
-                            "moduleName": "babel-runtime"
+                            "regenerator": false
                         } ]
                     ]
                 }
@@ -97,6 +96,10 @@ module.exports = function (grunt) {
             distclean: [ "node_modules" ]
         }
     })
-    grunt.registerTask("default", [ "eslint", "browserify:websocket-framed-browser", "babel:websocket-framed-node" ])
+    grunt.registerTask("default", [
+        "eslint",
+        "browserify:websocket-framed-browser",
+        "babel:websocket-framed-node"
+    ])
 }
 

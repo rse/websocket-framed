@@ -52,6 +52,7 @@ module.exports = function (grunt) {
                                 } ]
                             ],
                             plugins: [ [ "@babel/transform-runtime", {
+                                "helpers":     false,
                                 "regenerator": false
                             } ] ]
                         } ],
@@ -84,7 +85,7 @@ module.exports = function (grunt) {
                     ],
                     plugins: [
                         [ "@babel/transform-runtime", {
-                            "helpers":     true,
+                            "helpers":     false,
                             "regenerator": false
                         } ]
                     ]

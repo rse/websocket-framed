@@ -56,7 +56,7 @@ class Frame {
         return this
     }
     import (data) {
-        let frame = this.channel.codec.decode(data)
+        const frame = this.channel.codec.decode(data)
         this.fid  = frame[0]
         this.rid  = frame[1]
         this.type = frame[2]
@@ -64,8 +64,8 @@ class Frame {
         return this
     }
     export () {
-        let frame = [ this.fid, this.rid, this.type, this.data ]
-        let data = this.channel.codec.encode(frame)
+        const frame = [ this.fid, this.rid, this.type, this.data ]
+        const data = this.channel.codec.encode(frame)
         return data
     }
 }
@@ -86,7 +86,7 @@ class WebSocketFramed extends EventEmitter {
             }
         })())
         this.ws.addEventListener("message", (ev) => {
-            let frame = new Frame(this)
+            const frame = new Frame(this)
             try {
                 let data = ev.data
                 if (typeof data !== "string" && !ArrayBuffer.isView(data) && process.browser)
@@ -102,7 +102,7 @@ class WebSocketFramed extends EventEmitter {
         })
     }
     send (frameData, replyTo) {
-        let frame = new Frame(this)
+        const frame = new Frame(this)
         frame.set(frameData, replyTo)
         let data = frame.export()
         if (typeof data !== "string" && ArrayBuffer.isView(data) && process.browser)
